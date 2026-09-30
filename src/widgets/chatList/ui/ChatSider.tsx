@@ -32,9 +32,10 @@ export const ChatSider = ({onToggleSider}: ChatSiderProps) => {
   return (
     <div className={styles.root}>
       <div className={styles.toolbar}>
-        <NewChatButton />
+        <NewChatButton className={styles.iconButton} />
         <SearchField value={query} onChange={setQuery} />
         <Button
+          className={styles.iconButton}
           icon={<Menu size={16} />}
           aria-label={t('toggle-chats')}
           onClick={onToggleSider}

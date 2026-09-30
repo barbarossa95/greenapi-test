@@ -9,6 +9,13 @@
 .toolbar {
   display: flex;
   gap: 8px;
+  // Без растягивания по высоте ряда
+  align-items: center;
   padding: 12px;
   border-bottom: 1px solid var(--ant-color-border-secondary);
+}
+
+// Поле поиска (width: 100%) иначе сжимает кнопки-иконки в прямоугольник
+.iconButton {
+  flex-shrink: 0;
 }
