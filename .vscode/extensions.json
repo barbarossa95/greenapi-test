@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "eliostruyf.vscode-typescript-exportallmodules",
+    "yoavbls.pretty-ts-errors",
+    "rvest.vs-code-prettier-eslint",
+    "r5n.es-js-snippets",
+    "dbaeumer.vscode-eslint",
+    "lokalise.i18n-ally",
+    "ms-vscode.vscode-typescript-next",
+    "dbalage.vscode-stylesheet-formatter"
+  ]
+}

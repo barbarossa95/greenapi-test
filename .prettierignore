@@ -1,0 +1,3 @@
+build/*
+pnpm-lock.yaml
+src/shared/lib/i18n/i18n-*

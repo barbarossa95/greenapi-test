@@ -1,0 +1,34 @@
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+minimumReleaseAgeExclude:
+  - '@vitest/coverage-v8@5.0.3'
+  - '@vitest/mocker@5.0.3'
+  - '@vitest/pretty-format@5.0.3'
+  - '@vitest/spy@5.0.3'
+  - '@vitest/ui@5.0.3'
+  - '@vitest/utils@5.0.3'
+  - dotenv@18.0.5
+  - eslint-plugin-project-structure@3.14.5
+  - lucide-react@1.49.0
+  - sass-embedded-all-unknown@1.105.1
+  - sass-embedded-android-arm64@1.105.1
+  - sass-embedded-android-arm@1.105.1
+  - sass-embedded-android-riscv64@1.105.1
+  - sass-embedded-android-x64@1.105.1
+  - sass-embedded-darwin-arm64@1.105.1
+  - sass-embedded-darwin-x64@1.105.1
+  - sass-embedded-linux-arm64@1.105.1
+  - sass-embedded-linux-arm@1.105.1
+  - sass-embedded-linux-musl-arm64@1.105.1
+  - sass-embedded-linux-musl-arm@1.105.1
+  - sass-embedded-linux-musl-riscv64@1.105.1
+  - sass-embedded-linux-musl-x64@1.105.1
+  - sass-embedded-linux-riscv64@1.105.1
+  - sass-embedded-linux-x64@1.105.1
+  - sass-embedded-unknown-all@1.105.1
+  - sass-embedded-win32-arm64@1.105.1
+  - sass-embedded-win32-x64@1.105.1
+  - sass-embedded@1.105.1
+  - sass@1.105.1
+  - vitest@5.0.3

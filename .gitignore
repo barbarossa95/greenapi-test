@@ -1,0 +1,41 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+
+build
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+src/shared/lib/graphql
+src/shared/lib/openapi
+
+.env
+.react-router
+
+projectStructure.cache.json
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Playwright
+/test-results/
+/playwright-report/
+/playwright/.cache/
