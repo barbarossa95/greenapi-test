@@ -44,3 +44,13 @@ the instance settings:
 | `pnpm unit`   | Unit tests (Vitest)                  |
 | `pnpm lint`   | ESLint                               |
 | `pnpm format` | Format with Prettier                 |
+
+## TODO
+
+- [ ] Fix markup on mobile devices
+- [ ] Support touch events
+- [ ] Make the create chat and toggle sidebar buttons square
+- [ ] Refactor `ChatSider`: render `Layout.Sider` inside it instead of
+      wrapping it, and pass `...props` through
+- [ ] Deploy to a server with an Ansible playbook, with nginx as a reverse
+      proxy
