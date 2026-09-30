@@ -34,8 +34,12 @@ export const formatDateDisplay = (dateFromBackend: Date) => {
   const targetDate = dayjs(dateFromBackend);
 
   if (targetDate.isSame(today, 'day')) {
-    return i18n.t('list_field_labels.today');
+    return i18n.t('today');
   }
 
   return targetDate.format(EDateFormatPattern.DATE_WITH_SLASH);
 };
+
+// GREEN-API отдаёт время в секундах
+export const formatUnixTime = (timestamp: number) =>
+  dayjs.unix(timestamp).format(EDateFormatPattern.TIME);

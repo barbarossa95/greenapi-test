@@ -1,5 +1,6 @@
 import '@ant-design/v5-patch-for-react-19';
 import '@/shared/lib/i18n';
+import './global.scss';
 
 import {NuqsAdapter} from 'nuqs/adapters/react-router/v8';
 

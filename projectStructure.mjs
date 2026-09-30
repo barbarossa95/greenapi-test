@@ -8,7 +8,7 @@ const withBarrelFile = (/** @type {any[]} */ rules) => [
 ];
 
 // Entities folder, TBU
-const SLICES = '(chat|message)';
+const SLICES = '(chat|message|instance)';
 
 const SEGMENTS = withBarrelFile([
   {ruleId: 'ui_segment'},
@@ -87,12 +87,13 @@ export const projectStructureConfig = createFolderStructure({
     // Api
     api_segment: {
       name: 'api',
-      children: withBarrelFile([
-        {name: 'fragments', children: withBarrelFile([{name: '*.ts'}])},
-        {name: 'mutation', children: withBarrelFile([{name: '*.ts'}])},
-        {name: 'query', children: withBarrelFile([{name: '*.ts'}])},
-        {name: 'generated', children: []},
-      ]),
+      children: withBarrelFile([{name: '{camelCase}.ts'}]),
+      // children: withBarrelFile([
+      //   {name: 'fragments', children: withBarrelFile([{name: '*.ts'}])},
+      //   {name: 'mutation', children: withBarrelFile([{name: '*.ts'}])},
+      //   {name: 'query', children: withBarrelFile([{name: '*.ts'}])},
+      //   {name: 'generated', children: []},
+      // ]),
     },
 
     // Model

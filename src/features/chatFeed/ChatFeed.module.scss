@@ -1,0 +1,52 @@
+.feed {
+  position: relative;
+  // Свой контекст наложения, чтобы фон с z-index: -1 не ушёл под layout
+  isolation: isolate;
+  height: 100%;
+  text-align: start;
+  background: var(--ant-color-bg-layout);
+
+  // Узор отдельным слоем: прозрачность не затрагивает сообщения,
+  // фон не прокручивается вместе со списком
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    content: '';
+    background-image: url('/pattern-1.svg');
+    background-repeat: repeat;
+    // Исходник 1125×2436: @3x ширины телефона
+    background-size: 375px auto;
+    opacity: 0.08;
+  }
+}
+
+.list {
+  height: 100%;
+  padding: 16px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.footer {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  font-size: var(--ant-font-size-sm);
+  color: var(--ant-color-text-tertiary);
+}
+
+.read {
+  color: var(--ant-color-primary);
+}
+
+.failed {
+  color: var(--ant-color-error);
+}

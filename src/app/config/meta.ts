@@ -1,6 +1,6 @@
 export const meta = () => [
   {
-    title: 'Project boilerplate',
+    title: 'Green API',
   },
   {
     name: 'viewport',

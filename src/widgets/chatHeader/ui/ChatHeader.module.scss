@@ -1,0 +1,19 @@
+.header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
+  color: var(--ant-color-text);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.subtitle {
+  font-size: var(--ant-font-size-sm);
+  color: var(--ant-color-text-secondary);
+}

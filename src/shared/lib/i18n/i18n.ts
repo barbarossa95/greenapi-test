@@ -10,7 +10,10 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
+    defaultNS: 'translation',
     fallbackLng: ELanguage.EN,
+    // React сам экранирует текст
+    interpolation: {escapeValue: false},
     detection: {
       order: ['localStorage', 'navigator', 'htmlTag'],
       lookupLocalStorage: 'i18nextLng',

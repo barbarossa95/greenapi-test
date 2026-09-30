@@ -1,0 +1,28 @@
+.layout {
+  height: 100%;
+  overflow: hidden;
+}
+
+.sider {
+  padding: 0;
+  background-color: transparent;
+}
+
+// Layout.Header в antd по умолчанию тёмный
+.header {
+  height: 64px;
+  padding: 0;
+  line-height: normal;
+  background: var(--ant-color-bg-container);
+  border-bottom: 1px solid var(--ant-color-border-secondary);
+}
+
+.content {
+  min-height: 120px;
+  padding: 0;
+  text-align: center;
+}
+
+.footer {
+  padding: 0;
+}

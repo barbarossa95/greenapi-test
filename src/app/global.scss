@@ -1,0 +1,54 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  display: flex;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+::-webkit-scrollbar-corner,
+::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: var(--ant-border-radius-sm); /* Using another token for consistency */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--ant-color-text-tertiary);
+  border-radius: var(--ant-border-radius-sm); /* Using another token for consistency */
+}
