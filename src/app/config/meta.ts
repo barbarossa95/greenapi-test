@@ -9,8 +9,4 @@ export const meta = () => [
   {
     charset: 'utf-8',
   },
-  {
-    name: 'Content-Security-Policy',
-    content: "media-src 'self'",
-  },
 ];

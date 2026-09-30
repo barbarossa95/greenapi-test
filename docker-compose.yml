@@ -1,7 +1,6 @@
 # Готовый compose-файл для быстрого запуска приложения.
 # Команда запуска: docker compose up -d
 # Приложение: http://localhost:3000 (порт — APP_PORT в .env)
-# BFF по умолчанию: VITE_API_URL=http://localhost:8080 (при смене — пересобрать образ)
 
 services:
   frontend:
@@ -9,8 +8,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      args:
-        VITE_API_URL: ${VITE_API_URL:-http://localhost:8080}
     ports:
       - '${APP_PORT:-3000}:3000'
     restart: unless-stopped

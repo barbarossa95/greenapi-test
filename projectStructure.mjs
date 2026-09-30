@@ -111,7 +111,6 @@ export const projectStructureConfig = createFolderStructure({
         {ruleId: 'hooks_folder'},
         {name: '{camelCase}.(ts|tsx)'},
         {name: 'i18n', children: []},
-        {name: 'graphql', children: []},
         {name: '{camelCase}', children: [{name: '{camelCase}.(ts|tsx)'}]},
       ]),
     },
@@ -162,7 +161,6 @@ export const projectStructureConfig = createFolderStructure({
             {
               name: 'config',
               children: withBarrelFile([
-                {name: 'codegen.ts'},
                 {name: 'links.ts'},
                 {name: 'meta.ts'},
               ]),

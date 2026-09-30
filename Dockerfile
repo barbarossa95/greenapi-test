@@ -1,7 +1,7 @@
 FROM node:22.22.0-alpine AS base
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable && corepack prepare pnpm@10.11.0 --activate
+RUN corepack enable && corepack prepare pnpm@12.8.1 --activate
 WORKDIR /app
 
 COPY package.json pnpm-lock.yaml ./
@@ -14,9 +14,6 @@ RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 
 ARG CI
 ENV CI=$CI
-
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
 
 COPY . .
 

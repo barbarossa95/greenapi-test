@@ -23,9 +23,6 @@ build
 *.sln
 *.sw?
 
-src/shared/lib/graphql
-src/shared/lib/openapi
-
 .env
 .react-router
 
