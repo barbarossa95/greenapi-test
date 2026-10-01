@@ -1,15 +1,14 @@
-# Готовый compose-файл для быстрого запуска приложения.
+# Production: приложение за Traefik.
+# Требуется внешняя сеть traefik-public и DOMAIN в .env.
 # Команда запуска: docker compose up -d
-# Приложение: http://localhost:3000 (порт — APP_PORT в .env)
+# Приложение: https://greenapi.${DOMAIN}
 
 services:
   frontend:
-    container_name: frontend
+    container_name: greenapi-front
     build:
       context: .
       dockerfile: Dockerfile
-    ports:
-      - '${APP_PORT:-3000}:3000'
     restart: unless-stopped
     healthcheck:
       test:
@@ -23,3 +22,19 @@ services:
       timeout: 5s
       retries: 3
       start_period: 10s
+    networks:
+      - traefik-public
+    labels:
+      - 'traefik.enable=true'
+      # Domain the app is served on
+      - 'traefik.http.routers.greenapi-front.rule=Host(`greenapi.${DOMAIN:?DOMAIN must be set}`)'
+      - 'traefik.http.routers.greenapi-front.entrypoints=websecure'
+      - 'traefik.http.routers.greenapi-front.tls.certresolver=letsencrypt'
+      # Port the app listens on INSIDE the container
+      - 'traefik.http.services.greenapi-front.loadbalancer.server.port=3000'
+      # Optional: protect with the dashboard basic auth
+      # - 'traefik.http.routers.greenapi-front.middlewares=auth@docker'
+
+networks:
+  traefik-public:
+    external: true

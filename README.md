@@ -34,6 +34,23 @@ the instance settings:
 - enable notifications about outgoing message statuses to see delivered and
   read ticks
 
+## Run with Docker
+
+Local run on http://localhost:3000 (port is `APP_PORT` in `.env`):
+
+```sh
+docker compose -f docker-compose.dev.yml up -d
+```
+
+Production run behind [Traefik](https://traefik.io). It needs the external
+`traefik-public` network and `DOMAIN` in `.env` (see `.env.example`); the app is
+served on `https://greenapi.<DOMAIN>`:
+
+```sh
+cp .env.example .env
+docker compose up -d
+```
+
 ## Scripts
 
 | Command       | Description                          |

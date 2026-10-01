@@ -1,0 +1,25 @@
+# Локальный запуск production-сборки без Traefik.
+# Команда запуска: docker compose -f docker-compose.dev.yml up -d
+# Приложение: http://localhost:3000 (порт — APP_PORT в .env)
+
+services:
+  frontend:
+    container_name: greenapi-front-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '127.0.0.1:${APP_PORT:-3000}:3000'
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          'CMD',
+          'node',
+          '-e',
+          "fetch('http://127.0.0.1:3000').then((r) => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
