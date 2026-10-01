@@ -12,7 +12,9 @@ import {
   selectChatMessages,
   selectCurrentChat,
   selectHasChatMessages,
+  selectIsInstanceSet,
   useChatStore,
+  useInstanceStore,
   useMessageStore,
 } from '@/entities';
 import {CreateChatModal} from '@/features/createChat';
@@ -22,6 +24,7 @@ import {
   type TranslationKey,
   useDisclosure,
 } from '@/shared';
+import {SelectInstanceButton} from '../selectInstance/SelectInstanceButton';
 
 import styles from './ChatFeed.module.scss';
 
@@ -95,6 +98,22 @@ export const ChatFeed = () => {
       mergeMessages(history.data.map(fromHistoryMessage), current)
     );
   }, [chatId, history.data, setChatMessages]);
+
+  const isInstanceSet = useInstanceStore(selectIsInstanceSet);
+
+  if (!isInstanceSet) {
+    return (
+      <>
+        <Result
+          status='info'
+          title={t('no-instance-selected')}
+          subTitle={t('provide-instance-data-to-use-application')}
+          extra={<SelectInstanceButton />}
+        />
+        <CreateChatModal open={opened} onClose={close} />
+      </>
+    );
+  }
 
   if (!chat) {
     return (

@@ -40,5 +40,8 @@
   "send-message-error": "Couldn't send the message",
   "today": "Today",
   "insert-emoji": "Insert emoji",
-  "toggle-chats": "Toggle chats"
+  "toggle-chats": "Toggle chats",
+  "provide-instance-data-to-use-application": "Provide instance data to use application",
+  "no-instance-selected": "No instance selected",
+  "new-instance": "New instance"
 }
