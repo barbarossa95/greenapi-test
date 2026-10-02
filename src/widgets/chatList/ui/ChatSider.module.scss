@@ -36,15 +36,20 @@
   padding: 12px;
   border-bottom: 1px solid var(--ant-color-border-secondary);
   transition: gap var(--ant-motion-duration-mid);
+}
 
-  .contacts {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-
-    width: 100%;
-    overflow: hidden;
-  }
+// Кнопка "+" и поиск: сжимаются вместе с панелью
+.contacts {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+  overflow: hidden;
+  transition:
+    width var(--ant-motion-duration-mid),
+    opacity var(--ant-motion-duration-mid),
+    visibility var(--ant-motion-duration-mid);
 }
 
 // Поле поиска (width: 100%) иначе сжимает кнопки-иконки в прямоугольник
@@ -52,10 +57,17 @@
   flex-shrink: 0;
 }
 
-// В свёрнутой панели остаётся одна кнопка меню, по центру
+// В свёрнутой панели остаётся одна кнопка меню, по центру.
+// visibility переключается в конце перехода и убирает скрытый ряд из Tab-навигации
 .collapsed {
   .toolbar {
-    justify-content: center;
     gap: 0;
+    justify-content: center;
+  }
+
+  .contacts {
+    width: 0;
+    visibility: hidden;
+    opacity: 0;
   }
 }

@@ -2,7 +2,6 @@ import {useEffect, useMemo, useState} from 'react';
 import {Button, Layout} from 'antd';
 import clsx from 'clsx';
 import {Menu} from 'lucide-react';
-import {AnimatePresence, motion} from 'motion/react';
 import {useTranslation} from 'react-i18next';
 
 import {useChatStore} from '@/entities';
@@ -91,21 +90,11 @@ export const ChatSider = () => {
         trigger={null}
       >
         <div className={styles.toolbar}>
-          <AnimatePresence>
-            {!collapsed ? (
-              <motion.div
-                key='contacts'
-                className={styles.contacts}
-                exit={{
-                  width: 0,
-                }}
-                transition={{duration: 0.2}}
-              >
-                <NewChatButton className={styles.iconButton} />
-                <SearchField value={query} onChange={setQuery} />
-              </motion.div>
-            ) : null}
-          </AnimatePresence>
+          {/* Ряд всегда в DOM, чтобы CSS мог анимировать сворачивание */}
+          <div className={styles.contacts}>
+            <NewChatButton className={styles.iconButton} />
+            <SearchField value={query} onChange={setQuery} />
+          </div>
           <Button
             className={styles.iconButton}
             icon={<Menu size={16} />}
