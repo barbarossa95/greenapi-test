@@ -7,6 +7,7 @@ import {useTranslation} from 'react-i18next';
 
 import {
   fromHistoryMessage,
+  getMessageTypeKey,
   mergeMessages,
   type Message,
   selectChatMessages,
@@ -18,12 +19,7 @@ import {
   useMessageStore,
 } from '@/entities';
 import {CreateChatModal} from '@/features/createChat';
-import {
-  apiQuery,
-  formatUnixTime,
-  type TranslationKey,
-  useDisclosure,
-} from '@/shared';
+import {apiQuery, formatUnixTime, useDisclosure} from '@/shared';
 import {SelectInstanceButton} from '../selectInstance/SelectInstanceButton';
 
 import styles from './ChatFeed.module.scss';
@@ -49,19 +45,6 @@ const MessageFooter = ({timestamp, status}: Message) => (
     <StatusIcon status={status} />
   </span>
 );
-
-// Подпись для нетекстовых сообщений по typeMessage
-const MESSAGE_TYPE_KEYS: Partial<Record<string, TranslationKey>> = {
-  imageMessage: 'message-type-image',
-  videoMessage: 'message-type-video',
-  documentMessage: 'message-type-document',
-  audioMessage: 'message-type-audio',
-  stickerMessage: 'message-type-sticker',
-  locationMessage: 'message-type-location',
-  contactMessage: 'message-type-contact',
-  pollMessage: 'message-type-poll',
-  reactionMessage: 'message-type-reaction',
-};
 
 // Сколько сообщений загружать из истории (по умолчанию в API тоже 100)
 const HISTORY_COUNT = 100;
@@ -135,14 +118,11 @@ export const ChatFeed = () => {
 
   const items: BubbleItemType[] = messages.map((message) => ({
     key: message.idMessage,
-    role: message.type,
+    role: 'user',
     content: message.text || (
       <Typography.Text type='secondary' italic>
         {t('unsupported-message', {
-          type: t(
-            MESSAGE_TYPE_KEYS[message.typeMessage ?? ''] ??
-              'message-type-unknown'
-          ),
+          type: t(getMessageTypeKey(message.typeMessage)),
         })}
       </Typography.Text>
     ),

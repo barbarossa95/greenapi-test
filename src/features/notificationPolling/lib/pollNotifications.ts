@@ -1,7 +1,10 @@
 import {getApiCredentials, useInstanceStore} from '@/entities';
 import {apiRequest, type ResponseOf} from '@/shared';
 
-import {handleNotification} from './handleNotification';
+import {
+  handleNotification,
+  type NotificationHandlers,
+} from './handleNotification';
 
 // Long polling: сервер держит запрос до RECEIVE_TIMEOUT_S секунд (лимит 5–60)
 const RECEIVE_TIMEOUT_S = 20;
@@ -23,7 +26,10 @@ const sleep = (ms: number, signal: AbortSignal) =>
   });
 
 // Цикл: получить -> обработать -> удалить. Работает до abort
-export const pollNotifications = async (signal: AbortSignal) => {
+export const pollNotifications = async (
+  signal: AbortSignal,
+  handlers: NotificationHandlers = {}
+) => {
   let failures = 0;
 
   while (!signal.aborted) {
@@ -45,7 +51,7 @@ export const pollNotifications = async (signal: AbortSignal) => {
 
       // Ошибка обработки не должна блокировать очередь
       try {
-        handleNotification(notification.body);
+        handleNotification(notification.body, handlers);
       } catch (error) {
         console.error('Failed to handle notification', notification, error);
       }

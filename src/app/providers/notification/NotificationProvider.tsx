@@ -14,7 +14,7 @@ export const NotificationProvider: FC<PropsWithChildren> = ({children}) => {
     icon?: ReactNode
   ) => {
     api[type]({
-      message,
+      title: message,
       description,
       placement: 'topRight',
       duration: 3,
