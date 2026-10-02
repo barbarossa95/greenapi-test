@@ -2,6 +2,8 @@
 
 Web chat client for Telegram built on [GREEN-API](https://green-api.com/telegram/docs/).
 
+Demo: https://greenapi.greshilove.ru/
+
 ## Requirements
 
 - Node.js 22.22+ (see `.nvmrc`)
