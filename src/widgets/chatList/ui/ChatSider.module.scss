@@ -1,9 +1,31 @@
 .root {
+  padding: 0;
+  background-color: transparent;
+}
+
+.body {
   display: flex;
   flex-direction: column;
   height: 100%;
   background: var(--ant-color-bg-container);
   border-right: 1px solid var(--ant-color-border-secondary);
+}
+
+// На мобильных сам Sider остаётся узким, а развёрнутое содержимое лежит поверх чата
+.overlay {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  z-index: 20;
+  width: 85vw;
+  box-shadow: var(--ant-box-shadow-secondary);
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--ant-color-bg-mask);
 }
 
 .toolbar {
@@ -13,9 +35,27 @@
   align-items: center;
   padding: 12px;
   border-bottom: 1px solid var(--ant-color-border-secondary);
+  transition: gap var(--ant-motion-duration-mid);
+
+  .contacts {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 // Поле поиска (width: 100%) иначе сжимает кнопки-иконки в прямоугольник
 .iconButton {
   flex-shrink: 0;
+}
+
+// В свёрнутой панели остаётся одна кнопка меню, по центру
+.collapsed {
+  .toolbar {
+    justify-content: center;
+    gap: 0;
+  }
 }

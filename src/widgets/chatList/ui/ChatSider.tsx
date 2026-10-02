@@ -1,9 +1,12 @@
-import {useMemo, useState} from 'react';
-import {Button} from 'antd';
+import {useEffect, useMemo, useState} from 'react';
+import {Button, Layout} from 'antd';
+import clsx from 'clsx';
 import {Menu} from 'lucide-react';
+import {AnimatePresence, motion} from 'motion/react';
 import {useTranslation} from 'react-i18next';
 
 import {useChatStore} from '@/entities';
+import {useDisclosure} from '@/shared';
 import {filterChats} from '../lib';
 
 import {ChatList} from './ChatList';
@@ -12,16 +15,24 @@ import {SearchField} from './SearchField';
 
 import styles from './ChatSider.module.scss';
 
-interface ChatSiderProps {
-  onToggleSider: () => void;
-}
-// Боковая панель: данные из стора и поиск здесь, ChatList только отображает
-export const ChatSider = ({onToggleSider}: ChatSiderProps) => {
+const {Sider} = Layout;
+
+// Ширина свёрнутой панели: аватар 40px + отступы пункта списка.
+// На мобильных панель всегда занимает в потоке только эту ширину
+const SIDER_COLLAPSED_WIDTH = 72;
+
+export const ChatSider = () => {
   const {t} = useTranslation();
+
+  const [collapsed, {open: collapse, close: expand, toggle}] = useDisclosure();
+  const [isMobile, setIsMobile] = useState(false);
+  const [query, setQuery] = useState('');
+
+  const overlayOpened = isMobile && !collapsed;
+
   const chatsMap = useChatStore(({chats}) => chats);
   const currentChatId = useChatStore(({currentChatId}) => currentChatId);
   const setCurrentChat = useChatStore(({setCurrentChat}) => setCurrentChat);
-  const [query, setQuery] = useState('');
 
   const chats = useMemo(() => Array.from(chatsMap.values()), [chatsMap]);
   const filteredChats = useMemo(
@@ -29,24 +40,92 @@ export const ChatSider = ({onToggleSider}: ChatSiderProps) => {
     [chats, query]
   );
 
+  // На узком экране панель по умолчанию свёрнута, а развёрнутая лежит поверх чата
+  const handleBreakpoint = (broken: boolean) => {
+    setIsMobile(broken);
+    if (broken) {
+      collapse();
+    } else {
+      expand();
+    }
+  };
+
+  const handleSelectChat = (chatId: string) => {
+    setCurrentChat(chatId);
+
+    if (isMobile) {
+      collapse();
+    }
+  };
+
+  // Esc закрывает развёрнутую поверх чата панель
+  useEffect(() => {
+    if (!overlayOpened) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') collapse();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [overlayOpened, collapse]);
+
   return (
-    <div className={styles.root}>
-      <div className={styles.toolbar}>
-        <NewChatButton className={styles.iconButton} />
-        <SearchField value={query} onChange={setQuery} />
-        <Button
-          className={styles.iconButton}
-          icon={<Menu size={16} />}
-          aria-label={t('toggle-chats')}
-          onClick={onToggleSider}
+    <>
+      <Sider
+        classNames={{
+          root: styles.root,
+          body: clsx(
+            styles.body,
+            collapsed && styles.collapsed,
+            overlayOpened && styles.overlay
+          ),
+        }}
+        width={isMobile ? SIDER_COLLAPSED_WIDTH : '25%'}
+        collapsedWidth={SIDER_COLLAPSED_WIDTH}
+        breakpoint='md'
+        onBreakpoint={handleBreakpoint}
+        collapsed={collapsed}
+        collapsible
+        trigger={null}
+      >
+        <div className={styles.toolbar}>
+          <AnimatePresence>
+            {!collapsed ? (
+              <motion.div
+                key='contacts'
+                className={styles.contacts}
+                exit={{
+                  width: 0,
+                }}
+                transition={{duration: 0.2}}
+              >
+                <NewChatButton className={styles.iconButton} />
+                <SearchField value={query} onChange={setQuery} />
+              </motion.div>
+            ) : null}
+          </AnimatePresence>
+          <Button
+            className={styles.iconButton}
+            icon={<Menu size={16} />}
+            aria-label={t('toggle-chats')}
+            aria-expanded={!collapsed}
+            onClick={toggle}
+          />
+        </div>
+        <ChatList
+          // Поле поиска скрыто, поэтому в свёрнутом виде фильтр не применяем
+          chats={collapsed ? chats : filteredChats}
+          currentChatId={currentChatId}
+          onSelectChat={handleSelectChat}
+          collapsed={collapsed}
+          emptyText={t(chats.length ? 'no-chats-found' : 'no-chats')}
         />
-      </div>
-      <ChatList
-        chats={filteredChats}
-        currentChatId={currentChatId}
-        onSelectChat={setCurrentChat}
-        emptyText={t(chats.length ? 'no-chats-found' : 'no-chats')}
-      />
-    </div>
+      </Sider>
+      {overlayOpened && (
+        <div className={styles.backdrop} aria-hidden onClick={collapse} />
+      )}
+    </>
   );
 };

@@ -48,3 +48,10 @@
 .subtitle {
   color: var(--ant-color-text-secondary);
 }
+
+.collapsed {
+  .item {
+    justify-content: center;
+    padding-inline: 0;
+  }
+}

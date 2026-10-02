@@ -3,28 +3,18 @@ import {Layout} from 'antd';
 import {ChatFeed} from '@/features/chatFeed';
 import {ChatForm} from '@/features/chatForm';
 import {useNotificationPolling} from '@/features/notificationPolling';
-import {useDisclosure} from '@/shared';
 import {ChatHeader, ChatSider} from '@/widgets';
 
 import styles from './MainPage.module.scss';
 
-const {Header, Footer, Sider, Content} = Layout;
+const {Header, Footer, Content} = Layout;
 
 export const MainPage = () => {
   useNotificationPolling();
-  const [collapsed, {toggle}] = useDisclosure();
 
   return (
     <Layout className={styles.layout}>
-      <Sider
-        width='25%'
-        className={styles.sider}
-        collapsed={collapsed}
-        collapsible
-        trigger={null}
-      >
-        <ChatSider onToggleSider={toggle} />
-      </Sider>
+      <ChatSider />
       <Layout>
         <Header className={styles.header}>
           <ChatHeader />
