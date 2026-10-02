@@ -20,6 +20,7 @@ export const ChatAvatar = ({
     <Avatar
       size={size}
       icon={initial ? undefined : <User size={20} />}
+      style={{flexShrink: 0}}
       {...props}
     >
       {initial}

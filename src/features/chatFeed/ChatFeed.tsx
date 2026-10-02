@@ -118,7 +118,7 @@ export const ChatFeed = () => {
 
   const items: BubbleItemType[] = messages.map((message) => ({
     key: message.idMessage,
-    role: 'user',
+    role: message.type === 'incoming' ? 'ai' : message.type,
     content: message.text || (
       <Typography.Text type='secondary' italic>
         {t('unsupported-message', {

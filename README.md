@@ -64,10 +64,10 @@ docker compose up -d
 
 ## TODO
 
-- [ ] Fix markup on mobile devices
+- [x] Fix markup on mobile devices
 - [ ] Support touch events
 - [x] Make the create chat and toggle sidebar buttons square
-- [ ] Refactor `ChatSider`: render `Layout.Sider` inside it instead of
+- [x] Refactor `ChatSider`: render `Layout.Sider` inside it instead of
       wrapping it, and pass `...props` through
-- [ ] Deploy to a server with an Ansible playbook, with nginx as a reverse
-      proxy
+- [x] Deploy to a server with an Ansible playbook, with nginx as a reverse
+- [x] notifications

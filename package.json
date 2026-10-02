@@ -31,7 +31,6 @@
     ]
   },
   "dependencies": {
-    "@ant-design/v5-patch-for-react-19": "^1.0.3",
     "@ant-design/x": "^2.9.0",
     "@emoji-mart/data": "^1.2.1",
     "@playwright/test": "^1.63.0",
